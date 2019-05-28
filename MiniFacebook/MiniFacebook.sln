@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniFacebook", "MiniFacebook\MiniFacebook.csproj", "{B3767B0B-B0F5-4868-949B-4D5F85E92372}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3767B0B-B0F5-4868-949B-4D5F85E92372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3767B0B-B0F5-4868-949B-4D5F85E92372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3767B0B-B0F5-4868-949B-4D5F85E92372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3767B0B-B0F5-4868-949B-4D5F85E92372}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C9016B8-0E8F-4E0A-95AC-7C06F86FD1D4}
+	EndGlobalSection
+EndGlobal
