@@ -34,7 +34,6 @@ namespace CrudUsuarios.Entities {
                                 "'" + cliente.Telefone + "', " +
                                 "'" + cliente.Cpf + "'" +
                             ")";
-            Console.WriteLine(query);
             BD banco = new BD();
             int linhas = banco.Inserir(query);
             return linhas;
@@ -42,7 +41,6 @@ namespace CrudUsuarios.Entities {
 
         public int RemoverCliente(string cpf) {
             string query = "delete from cliente where cpf = '" + cpf + "'";
-            Console.WriteLine(query);
             BD banco = new BD();
             int linhas = banco.Remover(query);
             return linhas;
@@ -57,7 +55,6 @@ namespace CrudUsuarios.Entities {
                                 "cidade = '" + cliente.Cidade + "'," +
                                 "telefone = '" + cliente.Telefone + "' " +
                             "WHERE cpf = '"+ cliente.Cpf + "';";
-            Console.WriteLine(query);
             BD banco = new BD();
             int linhas = banco.Atualizar(query);
             return linhas;
@@ -67,7 +64,6 @@ namespace CrudUsuarios.Entities {
             string query = "select nome, endereco, bairro, cidade, telefone " +
                             "from cliente " +
                             "where cpf = '" + cpf + "';";
-            Console.WriteLine(query);
             BD banco = new BD();
             banco.Consultar(query, "cliente");
         }

@@ -32,7 +32,6 @@ namespace CrudUsuarios.Entities {
                                 "'" + usuario.Rg + "', " +
                                 "'" + usuario.Cpf + "'" +
                             ")";
-            Console.WriteLine(query);
             BD banco = new BD();
             int linhas = banco.Inserir(query);
             return linhas;
@@ -40,7 +39,6 @@ namespace CrudUsuarios.Entities {
 
         public int RemoverUsuario(string cpf) {
             string query = "delete from usuario where cpf = '" + cpf + "'";
-            Console.WriteLine(query);
             BD banco = new BD();
             int linhas = banco.Remover(query);
             return linhas;
@@ -54,7 +52,6 @@ namespace CrudUsuarios.Entities {
                                 "setor = '" + usuario.Setor + "', " +
                                 "rg = '" + usuario.Rg + "'" +
                             "WHERE cpf = '" + usuario.Cpf + "';";
-            Console.WriteLine(query);
             BD banco = new BD();
             int linhas = banco.Atualizar(query);
             return linhas;
@@ -64,7 +61,6 @@ namespace CrudUsuarios.Entities {
             string query = "select nome, email, setor, rg " +
                             "from usuario " +
                             "where cpf = '" + cpf + "';";
-            Console.WriteLine(query);
             BD banco = new BD();
             banco.Consultar(query, "usuario");
             
