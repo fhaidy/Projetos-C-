@@ -65,5 +65,10 @@ namespace CrudUsuarios.Entities {
             banco.Consultar(query, "usuario");
             
         }
+
+        public void ListarUsuarios(string table) {
+            BD banco = new BD();
+            banco.Listar("usuario");
+        }
     }
 }

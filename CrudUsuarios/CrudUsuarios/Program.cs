@@ -34,6 +34,7 @@ namespace CrudUsuarios {
                             Console.WriteLine("2 - Atualizar Usuário");
                             Console.WriteLine("3 - Remover Usuário");
                             Console.WriteLine("4 - Buscar Usuário");
+                            Console.WriteLine("5 - Listar Usuários");
                             Console.WriteLine("9 - Voltar para o Menu Inicial");
                             Console.WriteLine("0 - Sair do Sistema");
                             Console.Write("Escolha uma opção: ");
@@ -152,6 +153,22 @@ namespace CrudUsuarios {
 
                                     }
                                     break;
+                                case 5:
+                                    retorno = 0;
+                                    while (retorno == 0) {
+                                        Console.Clear();
+                                        Console.WriteLine("*********** Listagem de Usuários ***********");
+                                        Console.WriteLine();
+
+                                        Usuario usuario= new Usuario();
+                                        usuario.ListarUsuarios("usuario");
+
+                                        Console.WriteLine();
+                                        Console.WriteLine("Deseja listar novamente? (0 = Sim, 1 = Não)");
+                                        retorno = int.Parse(Console.ReadLine());
+
+                                    }
+                                    break;
                                 case 0:
                                     controlePrincipal = 0;
                                     break;
@@ -176,6 +193,7 @@ namespace CrudUsuarios {
                             Console.WriteLine("2 - Atualizar Cliente");
                             Console.WriteLine("3 - Remover Cliente");
                             Console.WriteLine("4 - Buscar Cliente");
+                            Console.WriteLine("5 - Listar Clientes");
                             Console.WriteLine("9 - Voltar para o menu anterior");
                             Console.WriteLine("0 - Sair do Sistema");
                             Console.Write("Escolha uma opção: ");
@@ -295,6 +313,22 @@ namespace CrudUsuarios {
 
                                         Console.WriteLine();
                                         Console.WriteLine("Deseja buscar outro cliente? (0 = Sim, 1 = Não)");
+                                        retorno = int.Parse(Console.ReadLine());
+
+                                    }
+                                    break;
+                                case 5:
+                                    retorno = 0;
+                                    while (retorno == 0) {
+                                        Console.Clear();
+                                        Console.WriteLine("*********** Listagem de Clientes ***********");
+                                        Console.WriteLine();
+
+                                        Cliente cliente = new Cliente();
+                                        cliente.ListarClientes("cliente");
+
+                                        Console.WriteLine();
+                                        Console.WriteLine("Deseja listar novamente? (0 = Sim, 1 = Não)");
                                         retorno = int.Parse(Console.ReadLine());
 
                                     }

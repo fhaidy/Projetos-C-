@@ -54,6 +54,43 @@ namespace CrudUsuarios.Services {
             return linhas;
         }
 
+        public void Listar(string table) {
+            
+            string query = "SELECT * FROM "+table;
+
+            MySqlConnection conexao = new BD().Conectar();
+            MySqlCommand comando = new MySqlCommand(query, conexao);
+            comando.Connection = conexao;
+            conexao.Open();
+            var leitor = comando.ExecuteReader();
+
+            while (leitor.Read()) {
+
+                switch (table) {
+                    case "cliente":
+                        Console.WriteLine("Nome: " + leitor["nome"]);
+                        Console.WriteLine("Endereco: " + leitor["endereco"]);
+                        Console.WriteLine("Bairro: " + leitor["bairro"]);
+                        Console.WriteLine("Cidade: " + leitor["cidade"]);
+                        Console.WriteLine("Telefone: " + leitor["telefone"]);
+                        Console.WriteLine("CPF: " + leitor["cpf"]);
+                        Console.WriteLine();
+                        break;
+                    case "usuario":
+                        Console.WriteLine("Nome: " + leitor["nome"]);
+                        Console.WriteLine("Email: " + leitor["email"]);
+                        Console.WriteLine("Setor: " + leitor["setor"]);
+                        Console.WriteLine("RG: " + leitor["rg"]);
+                        Console.WriteLine("CPF: " + leitor["cpf"]);
+                        Console.WriteLine();
+                        break;
+                    default:
+                        Console.WriteLine("Tabela inexistente, impossível listar.");
+                        break;
+                }
+            }
+        }
+
         public MySqlDataReader Consultar(string query, string table) {
             MySqlConnection conexao = new BD().Conectar();
             MySqlCommand comando = new MySqlCommand(query, conexao);
