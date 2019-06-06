@@ -24,49 +24,7 @@ namespace CrudUsuarios.Entities {
             Cpf = cpf;
         }
 
-       public int InserirCliente(Cliente cliente) {
-            string query = "insert into cliente (nome, endereco, bairro, cidade, telefone, cpf) " +
-                            "Values(" +
-                                "'" + cliente.Nome + "', " +
-                                "'" + cliente.Endereco + "', " +
-                                "'" + cliente.Bairro + "', " +
-                                "'" + cliente.Cidade + "', " +
-                                "'" + cliente.Telefone + "', " +
-                                "'" + cliente.Cpf + "'" +
-                            ")";
-            BD banco = new BD();
-            int linhas = banco.Inserir(query);
-            return linhas;
-        }
-
-        public int RemoverCliente(string cpf) {
-            string query = "delete from cliente where cpf = '" + cpf + "'";
-            BD banco = new BD();
-            int linhas = banco.Remover(query);
-            return linhas;
-        }
-
-        public int AtualizarCliente(Cliente cliente) {
-            string query = "update cliente " +
-                            "set " +
-                                "nome = '"+ cliente.Nome + "', " +
-                                "endereco = '" + cliente.Endereco + "', " +
-                                "bairro = '"+ cliente.Bairro + "', " +
-                                "cidade = '" + cliente.Cidade + "'," +
-                                "telefone = '" + cliente.Telefone + "' " +
-                            "WHERE cpf = '"+ cliente.Cpf + "';";
-            BD banco = new BD();
-            int linhas = banco.Atualizar(query);
-            return linhas;
-        }
-
-        public void ConsultarCliente (string cpf) {
-            string query = "select nome, endereco, bairro, cidade, telefone " +
-                            "from cliente " +
-                            "where cpf = '" + cpf + "';";
-            BD banco = new BD();
-            banco.Consultar(query, "cliente");
-        }
+        
 
         public void ListarClientes(string table) { 
             BD banco = new BD();

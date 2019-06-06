@@ -22,53 +22,5 @@ namespace CrudUsuarios.Entities {
             Rg = rg;
             Cpf = cpf;
         }
-
-        public int InserirUsuario(Usuario usuario) {
-            string query = "insert into usuario (nome, email, setor, rg, cpf) " +
-                            "Values(" +
-                                "'" + usuario.Nome + "', " +
-                                "'" + usuario.Email + "', " +
-                                "'" + usuario.Setor + "', " +
-                                "'" + usuario.Rg + "', " +
-                                "'" + usuario.Cpf + "'" +
-                            ")";
-            BD banco = new BD();
-            int linhas = banco.Inserir(query);
-            return linhas;
-        }
-
-        public int RemoverUsuario(string cpf) {
-            string query = "delete from usuario where cpf = '" + cpf + "'";
-            BD banco = new BD();
-            int linhas = banco.Remover(query);
-            return linhas;
-        }
-
-        public int AtualizarUsuario(Usuario usuario) {
-            string query = "update usuario " +
-                            "set " +
-                                "nome = '" + usuario.Nome + "', " +
-                                "email = '" + usuario.Email + "', " +
-                                "setor = '" + usuario.Setor + "', " +
-                                "rg = '" + usuario.Rg + "'" +
-                            "WHERE cpf = '" + usuario.Cpf + "';";
-            BD banco = new BD();
-            int linhas = banco.Atualizar(query);
-            return linhas;
-        }
-
-        public void ConsultarUsuario(string cpf) {
-            string query = "select nome, email, setor, rg " +
-                            "from usuario " +
-                            "where cpf = '" + cpf + "';";
-            BD banco = new BD();
-            banco.Consultar(query, "usuario");
-            
-        }
-
-        public void ListarUsuarios(string table) {
-            BD banco = new BD();
-            banco.Listar("usuario");
-        }
     }
 }

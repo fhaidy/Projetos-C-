@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Data;
 using CrudUsuarios.Entities;
 using CrudUsuarios.Services;
 namespace CrudUsuarios {
     class Program {
         static void Main(string[] args) {
-            //Cliente cliente = new Cliente("Fhaidy Maciel", "meu endereco", "meu bairro", "minha cidade", "meu fone", "meu cpf2");
-            //Usuario usuario = new Usuario("Fhaidy", "email2", "setor2", "rg2", "cpf123");
 
             BD banco = new BD();
 
@@ -64,7 +63,17 @@ namespace CrudUsuarios {
                                         string cpf = Console.ReadLine();
 
                                         Usuario usuario = new Usuario(nome, email, setor, rg, cpf);
-                                        retorno = usuario.InserirUsuario(usuario);
+
+                                        string query = "insert into usuario (nome, email, setor, rg, cpf) " +
+                                                        "Values(" +
+                                                            "'" + usuario.Nome + "', " +
+                                                            "'" + usuario.Email + "', " +
+                                                            "'" + usuario.Setor + "', " +
+                                                            "'" + usuario.Rg + "', " +
+                                                            "'" + usuario.Cpf + "'" +
+                                                        ")";
+
+                                        retorno = banco.Set(query);
 
                                         if (retorno >= 1) {
                                             Console.WriteLine();
@@ -99,7 +108,15 @@ namespace CrudUsuarios {
                                         string rg = Console.ReadLine();
 
                                         Usuario usuario = new Usuario(nome, email, setor, rg, cpf);
-                                        retorno = usuario.AtualizarUsuario(usuario);
+                                        string query = "update usuario " +
+                                                        "set " +
+                                                            "nome = '" + usuario.Nome + "', " +
+                                                            "email = '" + usuario.Email + "', " +
+                                                            "setor = '" + usuario.Setor + "', " +
+                                                            "rg = '" + usuario.Rg + "'" +
+                                                        "WHERE cpf = '" + usuario.Cpf + "';";
+
+                                        retorno = banco.Set(query);
 
                                         if (retorno >= 1) {
                                             Console.WriteLine();
@@ -121,8 +138,9 @@ namespace CrudUsuarios {
                                         Console.Write("Digite o CPF do usuário que deseja remover: ");
                                         string cpf = Console.ReadLine();
 
-                                        Usuario usuario = new Usuario();
-                                        retorno = usuario.RemoverUsuario(cpf);
+                                        string query = "delete from usuario where cpf = '" + cpf + "'";
+
+                                        retorno = banco.Set(query);
 
                                         if (retorno >= 1) {
                                             Console.WriteLine();
@@ -144,8 +162,27 @@ namespace CrudUsuarios {
                                         Console.Write("Digite o CPF do usuário que deseja buscar: ");
                                         string cpf = Console.ReadLine();
 
-                                        Usuario usuario = new Usuario();
-                                        usuario.ConsultarUsuario(cpf);
+                                        string query = "select nome, email, setor, rg, cpf " +
+                                                        "from usuario " +
+                                                        "where cpf = '" + cpf + "';";
+
+                                        DataTable table = banco.Get(query);
+
+                                        if (table.Rows.Count > 0 && table != null) {
+                                            foreach (DataRow row in table.Rows) {
+                                                Console.WriteLine("Nome: " + row["nome"].ToString());
+                                                Console.WriteLine("Email: " + row["email"].ToString());
+                                                Console.WriteLine("Setor: " + row["setor"].ToString());
+                                                Console.WriteLine("RG: " + row["rg"].ToString());
+                                                Console.WriteLine("CPF: " + row["cpf"].ToString());
+                                                Console.WriteLine();
+                                            }
+                                        } else {
+                                            Console.WriteLine("Não há nenhum registro na tabela. Pressione enter para continuar");
+                                            Console.ReadLine();
+                                            retorno = 1;
+                                        }
+
 
                                         Console.WriteLine();
                                         Console.WriteLine("Deseja buscar outro usuário? (0 = Sim, 1 = Não)");
@@ -160,9 +197,23 @@ namespace CrudUsuarios {
                                         Console.WriteLine("*********** Listagem de Usuários ***********");
                                         Console.WriteLine();
 
-                                        Usuario usuario= new Usuario();
-                                        usuario.ListarUsuarios("usuario");
+                                        string query = "SELECT * FROM usuario";
+                                        DataTable table = banco.Get(query);
 
+                                        if (table.Rows.Count > 0 && table != null) {
+                                            foreach (DataRow row in table.Rows) {
+                                                Console.WriteLine("Nome: " + row["nome"].ToString());
+                                                Console.WriteLine("Email: " + row["email"].ToString());
+                                                Console.WriteLine("Setor: " + row["setor"].ToString());
+                                                Console.WriteLine("RG: " + row["rg"].ToString());
+                                                Console.WriteLine("CPF: " + row["cpf"].ToString());
+                                                Console.WriteLine();
+                                            }
+                                        } else {
+                                            Console.WriteLine("Não há nenhum registro na tabela. Pressione enter para continuar");
+                                            Console.ReadLine();
+                                            retorno = 1;
+                                        }
                                         Console.WriteLine();
                                         Console.WriteLine("Deseja listar novamente? (0 = Sim, 1 = Não)");
                                         retorno = int.Parse(Console.ReadLine());
@@ -225,7 +276,18 @@ namespace CrudUsuarios {
                                         string cpf = Console.ReadLine();
 
                                         Cliente cliente = new Cliente(nome, endereco, bairro, cidade, telefone, cpf);
-                                        retorno = cliente.InserirCliente(cliente);
+
+                                        string query = "insert into cliente (nome, endereco, bairro, cidade, telefone, cpf) " +
+                                                        "Values(" +
+                                                            "'" + cliente.Nome + "', " +
+                                                            "'" + cliente.Endereco + "', " +
+                                                            "'" + cliente.Bairro + "', " +
+                                                            "'" + cliente.Cidade + "', " +
+                                                            "'" + cliente.Telefone + "', " +
+                                                            "'" + cliente.Cpf + "'" +
+                                                        ")";
+
+                                        retorno = banco.Set(query);
 
                                         if (retorno >= 1) {
                                             Console.WriteLine();
@@ -263,8 +325,15 @@ namespace CrudUsuarios {
                                         string telefone = Console.ReadLine();
 
                                         Cliente cliente = new Cliente(nome, endereco, bairro, cidade, telefone, cpf);
-                                        retorno = cliente.AtualizarCliente(cliente);
-
+                                        string query = "update cliente " +
+                                                        "set " +
+                                                            "nome = '" + cliente.Nome + "', " +
+                                                            "endereco = '" + cliente.Endereco + "', " +
+                                                            "bairro = '" + cliente.Bairro + "', " +
+                                                            "cidade = '" + cliente.Cidade + "'," +
+                                                            "telefone = '" + cliente.Telefone + "' " +
+                                                        "WHERE cpf = '" + cliente.Cpf + "';";
+                                        retorno = banco.Set(query);
                                         if (retorno >= 1) {
                                             Console.WriteLine();
                                             Console.WriteLine("Cliente atualizado com sucesso! Pressione Enter para continuar");
@@ -284,9 +353,8 @@ namespace CrudUsuarios {
                                         Console.WriteLine();
                                         Console.Write("Digite o CPF do cliente que deseja remover: ");
                                         string cpf = Console.ReadLine();
-
-                                        Cliente cliente = new Cliente();
-                                        retorno = cliente.RemoverCliente(cpf);
+                                        string query = "delete from cliente where cpf = '" + cpf + "'";
+                                        retorno = banco.Set(query);
 
                                         if (retorno >= 1) {
                                             Console.WriteLine();
@@ -308,8 +376,26 @@ namespace CrudUsuarios {
                                         Console.Write("Digite o CPF do usuário que deseja buscar: ");
                                         string cpf = Console.ReadLine();
 
-                                        Cliente cliente = new Cliente();
-                                        cliente.ConsultarCliente(cpf);
+                                        string query = "select nome, endereco, bairro, cidade, telefone, cpf " +
+                                                        "from cliente " +
+                                                        "where cpf = '" + cpf + "';";
+                                        DataTable table = banco.Get(query);
+
+                                        if (table.Rows.Count > 0 && table != null) {
+                                            foreach (DataRow row in table.Rows) {
+                                                Console.WriteLine("Nome: " + row["nome"].ToString());
+                                                Console.WriteLine("Endereço: " + row["endereco"].ToString());
+                                                Console.WriteLine("Bairro: " + row["bairro"].ToString());
+                                                Console.WriteLine("Cidade: " + row["cidade"].ToString());
+                                                Console.WriteLine("Telefone: " + row["telefone"].ToString());
+                                                Console.WriteLine("CPF: " + row["cpf"].ToString());
+                                                Console.WriteLine();
+                                            }
+                                        } else {
+                                            Console.WriteLine("Não há nenhum registro na tabela. Pressione enter para continuar");
+                                            Console.ReadLine();
+                                            retorno = 1;
+                                        }
 
                                         Console.WriteLine();
                                         Console.WriteLine("Deseja buscar outro cliente? (0 = Sim, 1 = Não)");
@@ -324,8 +410,24 @@ namespace CrudUsuarios {
                                         Console.WriteLine("*********** Listagem de Clientes ***********");
                                         Console.WriteLine();
 
-                                        Cliente cliente = new Cliente();
-                                        cliente.ListarClientes("cliente");
+                                        string query = "SELECT * FROM cliente";
+                                        DataTable table = banco.Get(query);
+
+                                        if (table.Rows.Count > 0 && table != null) {
+                                            foreach (DataRow row in table.Rows) {
+                                                Console.WriteLine("Nome: " + row["nome"].ToString());
+                                                Console.WriteLine("Endereço: " + row["endereco"].ToString());
+                                                Console.WriteLine("Bairro: " + row["bairro"].ToString());
+                                                Console.WriteLine("Cidade: " + row["cidade"].ToString());
+                                                Console.WriteLine("Telefone: " + row["telefone"].ToString());
+                                                Console.WriteLine("CPF: " + row["cpf"].ToString());
+                                                Console.WriteLine();
+                                            }
+                                        } else {
+                                            Console.WriteLine("Não há nenhum registro na tabela. Pressione enter para continuar");
+                                            Console.ReadLine();
+                                            retorno = 1;
+                                        }
 
                                         Console.WriteLine();
                                         Console.WriteLine("Deseja listar novamente? (0 = Sim, 1 = Não)");
@@ -349,34 +451,6 @@ namespace CrudUsuarios {
                         break;
                 }
             }
-            
-            /* linhas2 = cliente.RemoverCliente("meu cpf2");
-            if (linhas2 >= 1) {
-                Console.WriteLine("Removeu com sucesso");
-            } else {
-                Console.WriteLine("Deu ruim");
-            }
-
-            int linhas = cliente.InserirCliente(cliente);
-
-            if (linhas >= 1) {
-                Console.WriteLine("Inseriu com sucesso");
-            } else {
-                Console.WriteLine("Deu ruim");
-            }*/
-
-            //int linhas3 = cliente.AtualizarCliente(cliente);
-
-            /*if (linhas3 >= 1) {
-                Console.WriteLine("Atualizou com sucesso");
-            } else {
-                Console.WriteLine("Deu ruim");
-            }*/
-
-            //cliente.ConsultarCliente("meu cpf2");
-
-            //usuario.ConsultarUsuario("cpf123");
-
         }
     }
 }
