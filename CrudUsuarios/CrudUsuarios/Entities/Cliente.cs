@@ -24,15 +24,5 @@ namespace CrudUsuarios.Entities {
             Cpf = cpf;
         }
 
-        
-
-        public void ListarClientes(string table) { 
-            BD banco = new BD();
-            banco.Listar("cliente");
-        }
-
-
-
-
     }
 }
