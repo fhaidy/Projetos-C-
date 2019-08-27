@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc2.Models;
+using SalesWebMvc2.Models.ViewModels;
 using SalesWebMvc2.Services;
 
 namespace SalesWebMvc2.Controllers
 {
     public class SellersController : Controller {
         private readonly SellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerService) {
+        public SellersController(SellerService sellerService, DepartmentService departmentService) {
             _sellerService = sellerService;
+            _departmentService = departmentService;
         }
         public IActionResult Index() {
             var list = _sellerService.FindAll();
@@ -20,7 +23,11 @@ namespace SalesWebMvc2.Controllers
         }
 
         public IActionResult Create() {
-            return View();
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel() {
+                Departments = departments
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
